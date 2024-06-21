@@ -26,7 +26,7 @@ public sealed class Win32DiskDrive
             item.Description = (string)queryObj.Properties["Description"].Value;
             item.Index = (int)(uint)queryObj.Properties["Index"].Value;
 
-            item.SerialNumber = ((string)queryObj.Properties["SerialNumber"].Value).Trim();
+            item.SerialNumber = (string)queryObj.Properties["SerialNumber"].Value;
             item.PlugNPlayDeviceId = (string)queryObj.Properties["PNPDeviceID"].Value;
 
             QueryStorageInfo(item, timeout);
@@ -42,7 +42,7 @@ public sealed class Win32DiskDrive
     {
         using var searcher = new ManagementObjectSearcher(
             @"\\.\Root\Microsoft\Windows\Storage",
-            @$"SELECT BusType, MediaType FROM MSFT_PhysicalDisk WHERE SerialNumber = '{disk.SerialNumber}'");
+            @$"SELECT BusType, MediaType FROM MSFT_PhysicalDisk WHERE DeviceID = '{disk.DeviceID}'");
         searcher.Options.Timeout = timeout ?? System.Management.EnumerationOptions.InfiniteTimeout;
 
         foreach (var queryObj in searcher.Get())
