@@ -30,7 +30,7 @@ public sealed class Win32DiskDrive
             item.SerialNumber = (string)queryObj.Properties["SerialNumber"].Value;
             item.PlugNPlayDeviceId = (string)queryObj.Properties["PNPDeviceID"].Value;
 
-            QueryStorageInfo(item, timeout);
+            // QueryStorageInfo(item, timeout);
             Win32DiskPartition.QueryPartitions(item, timeout);
             item.IsSystemDisk = item.Partitions.Any(x => x.DeviceId == systemDrive);
             drives.Add(item);
