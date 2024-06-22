@@ -21,7 +21,7 @@ public sealed class Win32DiskDrive
         {
             var item = new Win32DiskDrive();
 
-            item.DeviceID = (string)queryObj.Properties["DeviceID"].Value;
+            item.DeviceId = (string)queryObj.Properties["DeviceID"].Value;
             item.Caption = (string)queryObj.Properties["Caption"].Value;
             item.Description = (string)queryObj.Properties["Description"].Value;
             item.Index = (int)(uint)queryObj.Properties["Index"].Value;
@@ -43,7 +43,7 @@ public sealed class Win32DiskDrive
     {
         using var searcher = new ManagementObjectSearcher(
             @"\\.\Root\Microsoft\Windows\Storage",
-            @$"SELECT BusType, MediaType FROM MSFT_PhysicalDisk WHERE DeviceID = '{disk.DeviceID}'");
+            @$"SELECT BusType, MediaType FROM MSFT_PhysicalDisk WHERE DeviceID = '{disk.DeviceId}'");
         searcher.Options.Timeout = timeout ?? System.Management.EnumerationOptions.InfiniteTimeout;
 
         foreach (var queryObj in searcher.Get())
