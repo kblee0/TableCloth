@@ -26,6 +26,7 @@ public sealed class Win32DiskDrive
             item.Description = (string)queryObj.Properties["Description"].Value;
             item.Index = (int)(uint)queryObj.Properties["Index"].Value;
 
+            // if vhd, serialnumber is null
             item.SerialNumber = (string)queryObj.Properties["SerialNumber"].Value;
             item.PlugNPlayDeviceId = (string)queryObj.Properties["PNPDeviceID"].Value;
 
