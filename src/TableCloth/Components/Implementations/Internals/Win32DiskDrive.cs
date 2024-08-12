@@ -30,6 +30,7 @@ public sealed class Win32DiskDrive
             item.SerialNumber = (string)queryObj.Properties["SerialNumber"].Value;
             item.PlugNPlayDeviceId = (string)queryObj.Properties["PNPDeviceID"].Value;
 
+            // vhd사용시 오류 수정
             // QueryStorageInfo(item, timeout);
             Win32DiskPartition.QueryPartitions(item, timeout);
             item.IsSystemDisk = item.Partitions.Any(x => x.DeviceId == systemDrive);
