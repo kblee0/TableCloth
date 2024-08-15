@@ -46,20 +46,29 @@ namespace Spork
         {
             try
             {
+                var line = 0;
                 var answer = DeserializeSporkAnswersJson();
-
+                line = 1;
                 if (!string.IsNullOrWhiteSpace(answer?.HostUILocale))
                 {
+                    line = 3;
                     var desiredCulture = new CultureInfo(answer.HostUILocale);
+                    line = 4;
                     SetDefaultCulture(desiredCulture);
+                    line = 5;
                 }
 
+                line = 6;
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+                line = 7;
                 // Application.Current 속성은 아래 생성자를 호출하면서 자동으로 설정됩니다.
                 var app = new App();
+                line = 8;
                 app.SetupHost(CreateHostBuilder(args).Build());
+                line = 9;
                 app.Run();
+                line = 10;
             }
             catch (Exception ex)
             {
