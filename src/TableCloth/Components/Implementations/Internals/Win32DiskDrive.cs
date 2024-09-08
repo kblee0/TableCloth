@@ -26,10 +26,10 @@ public sealed class Win32DiskDrive
             item.Description = (string)queryObj.Properties["Description"].Value;
             item.Index = (int)(uint)queryObj.Properties["Index"].Value;
 
-            // if vhd, serialnumber is null
             item.SerialNumber = (string)queryObj.Properties["SerialNumber"].Value;
             item.PlugNPlayDeviceId = (string)queryObj.Properties["PNPDeviceID"].Value;
 
+            // vhd 오류 방지를 위한 임시 수정
             // QueryStorageInfo(item, timeout);
             Win32DiskPartition.QueryPartitions(item, timeout);
             item.IsSystemDisk = item.Partitions.Any(x => x.DeviceId == systemDrive);
